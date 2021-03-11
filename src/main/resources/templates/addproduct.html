@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Add New Item</title>
+</head>
+<body>
+<div th:insert="main-menu"></div>
+<div th:insert="header"></div>
+
+        <div class="main">
+            <form th:action="@{/save-new-product}" th:object="${cmd}">
+                <table border="2" width="90%" align="center" cellpadding="7" class="table table-striped">     
+                    <tr>
+                        <td class="fheading" colspan="3">Adding new product</td>
+                    </tr>
+                    
+                    <tr><td align="right">Product Title</td><td>
+                            <input class="form-control" type="text" th:field="*{product_title}"/>
+                            <input type="hidden" th:field="*{product_id}"/>
+                    </td></tr>
+                    
+                    <tr><td align="right">Description</td><td>
+                            <textarea class="form-control"  th:field="*{product_descript}"></textarea>
+                    </td></tr>
+                    
+                    <tr><td align="right">Discount %</td><td>
+                            <input class="form-control" type="text" th:field="*{product_dicount}"/>
+                    </td></tr>
+                    
+                    <tr><td align="right">Selling Price</td><td>
+                            <input class="form-control" type="text" th:field="*{product_price}"/>
+                        </td>    
+                    </tr>
+                    
+                    <tr><td align="right">Category</td><td>
+					    <select class="form-control" id="status" name="status" th:field="*{product_category}">
+							<option th:each="i : ${categoryList}" th:value="${i.category_id}" th:text="${i.category_name}">
+							</option>					      
+					    </select>
+                    </td></tr>
+                    
+                    <tr><td align="right">Home Section</td><td>
+					    <select class="form-control" th:field="*{product_section}">
+					      <option th:each="i : ${sectionList}" th:value="${i.section_Id}" th:text="${i.section_name}">
+					      </option>
+					    </select>
+                    </td></tr>
+                    
+                    <tr><td align="right">Item Status</td><td>
+					    <select class="form-control" id="status" name="status" th:field="*{product_status}">
+					      <option value="active">Active</option>
+					      <option value="inactive">Inactive</option>
+					    </select>
+                    </td></tr>
+                    
+                    <tr><td align="right">Product Rating</td><td>
+					    <select class="form-control" id="rating" name="rating" th:field="*{product_rating}">
+					      <option value="1">1</option>
+					      <option value="2">2</option>
+					   	  <option value="3">3</option>
+					      <option value="4">4</option>
+					      <option value="5">5</option>
+					    </select>
+                    </td></tr>
+                    
+                    <tr><td align="right">Item Image</td><td>
+                         <input type="file" id="fileupload" th:field="*{product_image}"/>
+                     </td></tr>
+                                   
+                    <tr><td  align="right"></td><td>
+                        <button class ="btn btn-primary" id ="btn_submit">Submit</button>
+                        <button class ="btn btn-secondary" id ="btn_cancel">Upload</button>
+                    </td></tr>
+                    
+                </table>
+            </form>
+        </div>
+        
+        <script>
+        	async function upLoadFile(){
+        		let formData = new FormData();
+        		formData.append("file", fileupload.files[0]);
+        		let response=await fetch('/uploadImage', {
+        			method: "POST",
+        			body: formData
+        		});
+        		
+        		if(response.status==200){
+        			alert("Success!")
+        		}
+        	}
+        </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Category Manager</title>
+</head>
+<body>
+<div th:insert="main-menu"></div>
+<div th:insert="header"></div>
+
+        <div class="main">
+            <form th:action="@{/save-new-section}">
+                <table border="2" width="90%" align="center" cellpadding="7" class="table table-striped">     
+                    <tr>
+                        <td class="fheading" colspan="3">Adding new category</td>
+                    </tr>
+                    
+                    <tr><td align="right">Category Name</td><td>
+                            <input class="form-control" type="text"/>
+                            <input type="hidden"/>
+                    </td></tr>
+                    
+                    <tr><td align="right">Category url</td><td>
+                            <input class="form-control"/>
+                    </td></tr>
+                    
+                    <tr><td  align="right"></td><td>
+                        <button class ="btn btn-primary">Save</button>
+                        <button class ="btn btn-secondary">Cancel</button>
+                    </td></tr>            
+                </table>
+            </form>
+            <br/>
+	           <table border="1" width="90%" class="table table-striped">                         
+	                <tr>                       
+	                    <th>Count</th>
+	                    <th>ID</th>
+	                    <th>Category Name</th>                        
+	                    <th>URL</th>
+	                    <th>Action</th>                                       
+	                </tr>
+	                <tr th:each="cat,itr: ${categoryList}">                       
+	                    <td th:text="${itr.count}">SR</td>
+	                    <td th:text="${cat.category_id}"></td>
+	                    <td th:text="${cat.category_name}"></td>                        
+	                    <td th:text="${cat.category_url}"></td>
+	           			<td> <a th:href="@{'/edit-selected-section/'+${cat.category_id}}">Edit</a> | 
+                         	 <a th:href="@{'/delete-selected-section/'+${cat.category_id}}">Trash</a></td>
+	                </tr>
+	            </table>
+        </div>
+</body>
+</html>

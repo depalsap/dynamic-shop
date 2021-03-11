@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="sidenav">
+    <div >
+        <a  th:href="@{/}" style="padding-bottom: 0; padding-top:0 ; margin-left: 12px">
+                <img class="menulogo" th:src="@{/logo.jpg}" />     
+        </a>  
+        <a style="font-size: 12px; margin-left: 0; padding-top: 0" th:href="@{/}">www.codeworld.net</a>         
+    </div>
+
+    <div class="mheader">
+        Item Manager
+    </div>     
+    <a th:href="@{/addproduct}">Add Product</a>
+    <a th:href="@{/products}">List Products</a>
+    
+    <div class="mheader">
+        Section/Category
+    </div>   
+
+    <a th:href="@{/add-section}">Add Section</a>
+    <a th:href="@{/add-section}">List Sections</a>  
+    <a th:href="@{/add-category}">Add Category</a>
+    <a th:href="@{/add-category}">List Categories</a>  
+    
+    <div class="mheader">
+        Navigation
+    </div> 
+    
+    <a th:href="@{/}">Home</a>
+    <a th:href="@{/}">Logout</a> 
+    
+</div>
+</body>
+</html>

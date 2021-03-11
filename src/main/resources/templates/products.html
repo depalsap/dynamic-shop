@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="ISO-8859-1">
+<link th:href="@{/main.css}" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Products Manager</title>
+
+<script >
+	var courses;
+	$(document).ready(function () {
+	    $("#cat_id").change(function () {
+	        var instId = $("#cat_id").val();
+	        console.log(instId);
+	        
+	    });
+	});
+</script>
+
+<script type="text/javascript">
+	function searchBySection(){
+		var section_Id=sec_id.value;
+		console.log(section_Id);
+		window.location = '/products-by-section/'+section_Id;
+	}
+</script>
+
+<script type="text/javascript">
+	function searchProduct(){
+		var keyword=search.value;
+		console.log(keyword);
+		window.location = '/products-search/'+keyword;
+	}
+</script>
+
+</head>
+<body>
+<div th:insert="main-menu"></div>
+<div th:insert="header"></div>
+
+	<div class="main">
+	
+		<div class="searchfields">
+	   		<input class="form-control" id="search" type="text" onchange ="searchProduct(this)" placeholder="Search text .."/>
+	   		
+		    <select class="form-control" id="cat_id" name="category">
+			<option th:each="i : ${categoryList}" th:value="${i.category_id}" th:text="${i.category_name}">
+		    </select>
+		    
+		    <select class="form-control" id="sec_id" name="section" onchange ="searchBySection(this)">
+				<option th:each="i : ${sectionList}" th:value="${i.section_Id}" th:text="${i.section_name}">
+		    </select>
+		    
+		</div>
+		
+	       <table border="2" width="90%" align="center"  class="table table-striped">
+	           <thead>
+	               <tr>
+	                   <th>ID </th>
+	                   <th>Title </th>
+	                   <th>Description </th>
+	                   <th>Image ID</th>
+	                   <th>Price</th>
+	                   <th>Discount%</th>
+	                   <th>Rating</th>
+	                   <th>Modification</th>
+	                   
+	               </tr>
+	           </thead>
+	          
+	           <tbody>
+	           		<tr th:each="product: ${listProducts}">
+	                 	<td th:text="${product.product_id}"></td>
+	                    <td th:text="${product.product_title}"></td>
+	                    <td th:text="${product.product_descript}"></td>
+	                    <td th:text="${product.product_image}"></td>
+	                    <td th:text="${product.product_price}"></td>
+	                    <td th:text="${product.product_dicount}"> </td>
+	                    <td th:text="${product.product_rating}"> </td>
+	                    <td>
+							<a th:href="@{'/edit-selected-item/'+${product.product_id}}">Edit</a> | 
+                         	<a th:href="@{'/delete-selected-item/'+${product.product_id}}">Trash</a></td>
+	                 </tr>
+	           </tbody>
+	       </table>
+	   </div>
+
+</body>
+</html>

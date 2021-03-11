@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="App.css">
+<title>Amazing Prime</title>
+</head>
+<body>
+<div class="container">
+	<div class="itemcontainer">
+		<div th:each="product: ${listProducts}">
+            <div class="unicitem">
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4" >
+                        	<img th:src="@{${'http://localhost:8080/images/' + product.product_image}}" th:alt="@{${'http://localhost:8080/images/' + product.product_image}}" class="card-img"/>
+                          	
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${product.product_title}"></h5>
+                                <p class="card-text" th:text="${product.product_descript}"></p>
+                                <p class="card-text">
+                                    <small class="text-muted" th:text="${product.product_price}">Product Price :</small>
+                                </p>
+                                <button type="button" class="btn btn-outline-success" >Scopri di piuù</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+		</div>
+	</div>
+</div>
+</body>
+</html>
