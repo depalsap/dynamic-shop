@@ -12,7 +12,8 @@ import com.dynamic.shop.repository.ProductRepository;
 import com.dynamic.shop.domainmodels.ItemSection;
 import com.dynamic.shop.domainmodels.Products;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://deepalsap.netlify.app")
 @RestController
 @RequestMapping("/api/v1/")
 public class ProductsControllerAPI {
